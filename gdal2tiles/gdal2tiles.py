@@ -1778,6 +1778,7 @@ class GDAL2Tiles(object):
         tz = self.tmaxz
         for ty in range(tmaxy, tminy - 1, -1):
             for tx in range(tminx, tmaxx + 1):
+                print("ty : ", ty, ", tx : ", tx)
 
                 ti += 1
                 tilefilename = os.path.join(
@@ -1799,6 +1800,27 @@ class GDAL2Tiles(object):
                     b = self.mercator.TileBounds(tx, ty, tz)
                 elif self.options.profile == 'geodetic':
                     b = self.geodetic.TileBounds(tx, ty, tz)
+
+                print("b : ", b)
+
+                ulx = b[0]
+                uly = b[3]
+                lrx = b[2]
+                lry = b[1]
+
+                print("ulx : ", ulx, ", uly : ", uly, ", lrx : ", lrx, ", lry : ", lry)
+
+                # 북한 육지영역
+                # 38.139 123.293
+                # 39.63 127.927
+                if 123.293 < ulx < 127.927 and 38.139 < uly < 39.63 and 123.293 < lrx < 127.927 and 38.139 < lry < 39.63:
+                    continue
+
+                # 남한 육지영역
+                # 35.28 127.228
+                # 38.44 128.649
+                if 127.1 < ulx < 128.366 and 35.28 < uly < 38.44 and 127.1 < lrx < 128.366 and 35.28 < lry < 38.44:
+                    continue
 
                 # Don't scale up by nearest neighbour, better change the querysize
                 # to the native resolution (and return smaller query tile) for scaling
