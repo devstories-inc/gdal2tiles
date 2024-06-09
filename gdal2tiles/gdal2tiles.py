@@ -72,6 +72,8 @@ resampling_list = ('average', 'near', 'bilinear', 'cubic', 'cubicspline', 'lancz
 profile_list = ('mercator', 'geodetic', 'raster')
 webviewer_list = ('all', 'google', 'openlayers', 'leaflet', 'none')
 
+print("resampling_list : ", resampling_list)
+
 # =============================================================================
 # =============================================================================
 # =============================================================================
