@@ -1751,7 +1751,7 @@ class GDAL2Tiles(object):
         """
 
         if not self.options.quiet:
-            print("Generating Base Tiles:")
+            print("Generating Base Tiles:", "PPPPPPPPP")
 
         if self.options.verbose:
             print('')
