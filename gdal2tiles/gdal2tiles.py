@@ -1803,26 +1803,35 @@ class GDAL2Tiles(object):
                 elif self.options.profile == 'geodetic':
                     b = self.geodetic.TileBounds(tx, ty, tz)
 
-                print("b : ", b)
+                # print("b : ", b)
 
                 ulx = b[0]
                 uly = b[3]
                 lrx = b[2]
                 lry = b[1]
 
-                print("ulx : ", ulx, ", uly : ", uly, ", lrx : ", lrx, ", lry : ", lry)
+                # print("ulx : ", ulx, ", uly : ", uly, ", lrx : ", lrx, ", lry : ", lry)
+
+                # 경기만으로 영역을 한정한다.
+                # min_x = 125.58250452158572
+                # min_y = 36.96000842013926
+                # max_x = 126.87339807627322
+                # max_y = 37.72860394730805
+
+                if not (125.58250452158572 < ulx < 126.87339807627322 and 36.96000842013926 < uly < 37.72860394730805):
+                    continue
 
                 # 북한 육지영역
                 # 38.139 123.293
                 # 39.63 127.927
-                if 123.293 < ulx < 127.927 and 38.139 < uly < 39.63 and 123.293 < lrx < 127.927 and 38.139 < lry < 39.63:
-                    continue
+                # if 123.293 < ulx < 127.927 and 38.139 < uly < 39.63 and 123.293 < lrx < 127.927 and 38.139 < lry < 39.63:
+                #     continue
 
                 # 남한 육지영역
                 # 35.28 127.228
                 # 38.44 128.649
-                if 127.1 < ulx < 128.366 and 35.28 < uly < 38.44 and 127.1 < lrx < 128.366 and 35.28 < lry < 38.44:
-                    continue
+                # if 127.1 < ulx < 128.366 and 35.28 < uly < 38.44 and 127.1 < lrx < 128.366 and 35.28 < lry < 38.44:
+                #     continue
 
                 # Don't scale up by nearest neighbour, better change the querysize
                 # to the native resolution (and return smaller query tile) for scaling
